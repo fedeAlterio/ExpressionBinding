@@ -45,6 +45,27 @@ public void ShouldNotNotifyIfPropertyChangesOnOldReference()
     oldRoom.Table = new();
     counter.Should().Be(1);
 }
+
+[Fact]
+public void ShouldNotifyCollectionChanges()
+{
+    var house = new House
+    {
+        Rooms = { new() }
+    };
+
+    var counter = 0;
+    var subscription = house.WhenChanged(h => h.Rooms.FirstOrDefault())
+        .With<CollectionChangedObserver>()
+        .Do(() => counter++);
+
+    house.Rooms.Clear();
+    house.Rooms.Add(new());
+    subscription.Dispose();
+    house.Rooms.Clear();
+    counter.Should().Be(2);
+}
+
 ```
 
 # How does it work?
