@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace ExpressionBinding.BindingStrategies
+namespace ExpressionBinding.Observers.Members.Abstractions
 {
     public interface IMemberBindingObserver
     {

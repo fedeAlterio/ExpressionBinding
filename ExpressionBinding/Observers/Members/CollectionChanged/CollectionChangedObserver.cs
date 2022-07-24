@@ -2,9 +2,9 @@
 using System.Collections.Specialized;
 using System.Linq.Expressions;
 
-namespace ExpressionBinding.BindingStrategies
+namespace ExpressionBinding.Observers.Members.CollectionChanged
 {
-    public class CollectionChangedObserver : TypedBindingBindingObserver<INotifyCollectionChanged>
+    public class CollectionChangedObserver : TypedMemberObserver<INotifyCollectionChanged>
     {
         protected override IDisposable Subscribe(INotifyCollectionChanged collection, MemberExpression? memberExpression, Action onChanged)
         {

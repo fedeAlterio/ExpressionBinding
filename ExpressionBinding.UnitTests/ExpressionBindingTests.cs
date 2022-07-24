@@ -1,6 +1,6 @@
-using ExpressionBinding.BindingStrategies;
-using ExpressionBinding.Extensions;
+using ExpressionBinding.Observers.Members.CollectionChanged;
 using ExpressionBinding.UnitTests.Setup;
+using ExpressionBinding.UnitTests.Setup.Extensions;
 using FluentAssertions;
 
 namespace ExpressionBinding.UnitTests
@@ -12,8 +12,7 @@ namespace ExpressionBinding.UnitTests
         {
             var house = new House();
             bool nameChanged = false;
-            house.WhenChanged(h => h.Name)
-                .With<PropertyChangeObserver>()
+            house.WhenPropertyChanged(h => h.Name)
                 .Do(() => nameChanged = true);
 
             house.Name = "Name";
@@ -26,9 +25,8 @@ namespace ExpressionBinding.UnitTests
             var house = new House();
             int counter = 0;
             house
-                .WhenChanged(h => h.MainRoom.Table)
+                .WhenPropertyChanged(h => h.MainRoom.Table)
                 .WhenChanged(h => h.Name)
-                .With<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             house.MainRoom = new();
@@ -50,8 +48,7 @@ namespace ExpressionBinding.UnitTests
 
             var counter = 0;
             house
-                .WhenChanged(h => h.MainRoom.Table)
-                .With<PropertyChangeObserver>()
+                .WhenPropertyChanged(h => h.MainRoom.Table)
                 .Do(() => counter++);
 
             var oldRoom = house.MainRoom;
@@ -73,8 +70,7 @@ namespace ExpressionBinding.UnitTests
 
             var counter = 0;
             var subscription = house
-                .WhenChanged(h => h.MainRoom.Table)
-                .With<PropertyChangeObserver>()
+                .WhenPropertyChanged(h => h.MainRoom.Table)
                 .Do(() => counter++);
 
             subscription.Dispose();
@@ -91,7 +87,8 @@ namespace ExpressionBinding.UnitTests
             };
 
             var counter = 0;
-            var subscription = house.WhenChanged(h => h.Rooms.FirstOrDefault())
+            var subscription = house
+                .WhenPropertyChanged(h => h.Rooms.FirstOrDefault())
                 .With<CollectionChangedObserver>()
                 .Do(() => counter++);
 

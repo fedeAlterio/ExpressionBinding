@@ -5,10 +5,21 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Company>fedefex</Company>
+    <Authors>fedefex</Authors>
+    <Product>ExpressionBinding</Product>
+    <Description>A library that allows automatic, fluent binding and unbinding from  INotifyPorpertyChanged and INotifyCollectionChanged (and more), using expression trees</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/fedeAlterio/ExpressionBinding</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fedeAlterio/ExpressionBinding</RepositoryUrl>
+    <PackageTags>DataBinding, MVVM, Binding, Expression, Expression Tree</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Fedefex.ExpressionBinding</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <Folder Include="BindingStrategies\" />
   </ItemGroup>
 
 </Project>

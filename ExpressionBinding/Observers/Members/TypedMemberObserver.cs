@@ -1,8 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using ExpressionBinding.Observers.Members.Abstractions;
+using System.Linq.Expressions;
 
-namespace ExpressionBinding.BindingStrategies
+namespace ExpressionBinding.Observers.Members
 {
-    public abstract class TypedBindingBindingObserver<T> : IMemberBindingObserver
+    public abstract class TypedMemberObserver<T> : IMemberBindingObserver
     {
         public IDisposable? Subscribe(object bindingSource, MemberExpression? memberExpression, Action onChanged)
         {

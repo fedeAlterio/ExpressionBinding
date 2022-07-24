@@ -1,11 +1,10 @@
-﻿using ExpressionBinding.BindingStrategies;
+﻿using ExpressionBinding.Observers.Members.Abstractions;
 using ExpressionBinding.Utils;
 using System.Linq.Expressions;
 
-namespace ExpressionBinding;
+namespace ExpressionBinding.Observers.Expressions;
 
-
-public class BindingExpressionBase<TSource>
+public class ExpressionObserverBase<TSource>
 {
     public event Action? UnBound;
     private readonly List<Expression> _boundExpressions = new();
@@ -19,8 +18,12 @@ public class BindingExpressionBase<TSource>
 
     protected void AddBindingStrategy<TBindingStrategy>() where TBindingStrategy : IMemberBindingObserver, new()
     {
-        var strategy = new TBindingStrategy();
-        _bindingStrategies.Add(strategy);
+        AddBindingStrategy(new TBindingStrategy());
+    }
+
+    protected void AddBindingStrategy<TBindingStrategy>(TBindingStrategy bindingStrategy) where TBindingStrategy : IMemberBindingObserver
+    {
+        _bindingStrategies.Add(bindingStrategy);
     }
 
     protected virtual IDisposable Bind(TSource source, Action onExpressionChanged)
