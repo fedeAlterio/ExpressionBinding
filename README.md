@@ -2,7 +2,7 @@
 [Fedefex.ExpressionBinding](https://www.nuget.org/packages/Fedefex.ExpressionBinding/1.0.0?_src=template)
 
 # ExpressionBinding
-Let's start with the result. Those tests pass:
+Let's start with the result. These tests pass:
 
 ```C#
 [Fact]
