@@ -64,7 +64,7 @@ You can see that this class expect a parameter for be built `(@this)`. This will
 
 The second parameter of the extension method is an expression.
 
-You can think at it as the lambda: `h => h.MainRoom.Table` , considered not as a function, but as a collection (a tree) of all the "parts" on which the lambda is composed. So think at it as {h, h.MainRoom, h.MainRoom.Table}. Every part of the expression, so every element in {h, h.MainRoom, h.MainRoom.Table}, is an object containing all the metadata needed to fully classify itself. So if we put a breakpoint, exploring the expression we can see that:
+You can think at it as the lambda: `h => h.MainRoom.Table` , considered not as a function, but as a collection (a tree) of all the "parts" on which the lambda is composed. So think at it as `{h, h.MainRoom, h.MainRoom.Table}`. Every part of the expression, so every element in `{h, h.MainRoom, h.MainRoom.Table}`, is an object containing all the metadata needed to fully classify itself. So if we put a breakpoint, exploring the expression we can see that:
 
 * `h` is an instance of `ParameterExpression`
 * `h.MainRoom` is an instance of `MemberExpression` (Member = Property)
@@ -73,11 +73,11 @@ What we need to understand is that a `MemberExpression` class has a field called
 
 ## And now that we have the property names?
 
-Now that we have the strings "MainRoom" and "Table" we need just to subscribe to the NotifyPropertyChanged event of h and h.MainRoom respectively, and listen for changes of properties caleed "MainRoom" or "Table". If that's the case we just invoke a callback.
+Now that we have the strings `"MainRoom"` and `"Table"` we need just to subscribe to the NotifyPropertyChanged event of h and h.MainRoom respectively, and listen for changes of properties caleed `"MainRoom"` or `"Table"`. If that's the case we just invoke a callback.
 
 ## What if `h.MainRoom` is newed up?
 
-If h.MainRoom changes, that means that we have to unsubsrice to all old nested properties (the old h.MainRoom), and resubscribe to all the new ones. This is done automatically.
+If `h.MainRoom` changes, that means that we have to unsubsrice to all old nested properties (the old h.MainRoom), and resubscribe to all the new ones. This is done automatically.
 
 ## What if I need to unsubscribe completely from all?
 
