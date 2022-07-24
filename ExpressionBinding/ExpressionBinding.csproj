@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BindingStrategies\" />
+    <Folder Include="BindingStrategies\Abstractions\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
+using ExpressionBinding.Extensions;
 using ExpressionBinding.Observers.Members.CollectionChanged;
+using ExpressionBinding.Observers.Members.PropertyChanged;
 using ExpressionBinding.UnitTests.Setup;
-using ExpressionBinding.UnitTests.Setup.Extensions;
 using FluentAssertions;
 
 namespace ExpressionBinding.UnitTests
@@ -10,13 +11,16 @@ namespace ExpressionBinding.UnitTests
         [Fact]
         public void ShouldNotifyCorrectlyIfPropertyChange()
         {
-            var house = new House();
-            bool nameChanged = false;
-            house.WhenPropertyChanged(h => h.Name)
-                .Do(() => nameChanged = true);
+            var house = new House { MainRoom = new() };
+            Table? changedTable = null;
+            var defaultTable = new Table();
+            house.WhenChanged(h => h.MainRoom.Table)
+                .Bind()
+                .With(new PropertyChangeObserver())
+                .To(table => changedTable = table, fallbackValue: defaultTable);
 
-            house.Name = "Name";
-            nameChanged.Should().BeTrue();
+            house.MainRoom = null;
+            changedTable.Should().Be(defaultTable);
         }
 
         [Fact]
@@ -25,8 +29,9 @@ namespace ExpressionBinding.UnitTests
             var house = new House();
             int counter = 0;
             house
-                .WhenPropertyChanged(h => h.MainRoom.Table)
+                .WhenChanged(h => h.MainRoom.Table)
                 .WhenChanged(h => h.Name)
+                .With<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             house.MainRoom = new();
@@ -48,7 +53,8 @@ namespace ExpressionBinding.UnitTests
 
             var counter = 0;
             house
-                .WhenPropertyChanged(h => h.MainRoom.Table)
+                .WhenChanged(h => h.MainRoom.Table)
+                .With<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             var oldRoom = house.MainRoom;
@@ -70,7 +76,8 @@ namespace ExpressionBinding.UnitTests
 
             var counter = 0;
             var subscription = house
-                .WhenPropertyChanged(h => h.MainRoom.Table)
+                .WhenChanged(h => h.MainRoom.Table)
+                .With<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             subscription.Dispose();
@@ -88,7 +95,7 @@ namespace ExpressionBinding.UnitTests
 
             var counter = 0;
             var subscription = house
-                .WhenPropertyChanged(h => h.Rooms.FirstOrDefault())
+                .WhenChanged(h => h.Rooms.FirstOrDefault())
                 .With<CollectionChangedObserver>()
                 .Do(() => counter++);
 

@@ -4,29 +4,29 @@ using System.Linq.Expressions;
 
 namespace ExpressionBinding.Observers.Expressions;
 
-public class ExpressionObserverBase<TSource>
+public class ExpressionObserver<TSource>
 {
     public event Action? UnBound;
     private readonly List<Expression> _boundExpressions = new();
     private readonly List<IMemberBindingObserver> _bindingStrategies = new();
 
-    protected void WhenChanged<TValue>(Expression<Func<TSource, TValue>> expression)
+    public void Observe<TValue>(Expression<Func<TSource, TValue>> expression)
     {
         _boundExpressions.Add(expression);
     }
 
 
-    protected void AddBindingStrategy<TBindingStrategy>() where TBindingStrategy : IMemberBindingObserver, new()
+    public void AddObservationStrategy<TBindingStrategy>() where TBindingStrategy : IMemberBindingObserver, new()
     {
-        AddBindingStrategy(new TBindingStrategy());
+        AddObservationStrategy(new TBindingStrategy());
     }
 
-    protected void AddBindingStrategy<TBindingStrategy>(TBindingStrategy bindingStrategy) where TBindingStrategy : IMemberBindingObserver
+    public void AddObservationStrategy<TBindingStrategy>(TBindingStrategy bindingStrategy) where TBindingStrategy : IMemberBindingObserver
     {
         _bindingStrategies.Add(bindingStrategy);
     }
 
-    protected virtual IDisposable Bind(TSource source, Action onExpressionChanged)
+    public IDisposable Bind(TSource source, Action onExpressionChanged)
     {
         var memberExpressions = _boundExpressions.SelectMany(GetMemberExpressions);
         foreach (var memberExpression in memberExpressions)
