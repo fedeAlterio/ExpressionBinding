@@ -90,7 +90,7 @@ You can think at it as the lambda: `h => h.MainRoom.Table` , considered not as a
 * `h` is an instance of `ParameterExpression`
 * `h.MainRoom` is an instance of `MemberExpression` (Member = Property)
 * `h.MainRoom.Table` is an instance of `MemberExpression` too.
-What we need to understand is that a `MemberExpression` class has a field called Member. The latter contains all the information about the member it is representing (the one to the rightmost), and between these there is also the Name. In our case so we can then obtain the strings `"MainRoom"` and `"Table"` from h.MainRoom and h.MainRoom.Table respectively.
+What we need to understand is that a `MemberExpression` class has a field called `Member`. The latter contains all the information about the member it is representing (the one to the rightmost), and between these there is also the `Name`. In our case so we can then obtain the strings `"MainRoom"` and `"Table"` from `h.MainRoom` and `h.MainRoom.Table` respectively.
 
 ## And now that we have the property names?
 
