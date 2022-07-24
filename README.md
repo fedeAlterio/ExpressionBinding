@@ -49,7 +49,7 @@ public void ShouldNotNotifyIfPropertyChangesOnOldReference()
 
 # How does it work?
 
-Let's start from the beginning. WhenChanged is declared like this
+Let's start from the beginning. `WhenChanged` is declared like this
 
 ``` c#
 public static IExpressionChangedBuilder<TSource> WhenChanged<TSource, TValue>(this TSource @this, Expression<Func<TSource, TValue>> expression)
