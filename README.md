@@ -94,13 +94,13 @@ What we need to understand is that a `MemberExpression` class has a field called
 
 ## And now that we have the property names?
 
-Now that we have the strings `"MainRoom"` and `"Table"` we need just to subscribe to the NotifyPropertyChanged event of h and h.MainRoom respectively, and listen for changes of properties caleed `"MainRoom"` or `"Table"`. If that's the case we just invoke a callback.
+Now that we have the strings `"MainRoom"` and `"Table"` we need just to subscribe to the NotifyPropertyChanged event of `h` and `h.MainRoom respectively`, and listen for changes of properties caleed `"MainRoom"` or `"Table"`. If that's the case we just invoke a callback.
 
 ## What if `h.MainRoom` is newed up?
 
-If `h.MainRoom` changes, that means that we have to unsubsrice to all old nested properties (the old h.MainRoom), and resubscribe to all the new ones. This is done automatically.
+If `h.MainRoom` changes, that means that we have to unsubsribe from all the old nested properties (the old h.MainRoom), and resubscribe to all the new ones. This is done automatically.
 
-## What if I need to unsubscribe completely from all?
+## What if I need to unsubscribe completely from everything?
 
 When you subscribe you have returned back an IDisposable, that if called automatically unsubscribe from everything for you, releasing all the events.
 
