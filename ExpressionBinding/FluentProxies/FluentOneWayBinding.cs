@@ -22,7 +22,7 @@ namespace ExpressionBinding.FluentProxies
             _sourceExpression = sourceExpression;
         }
 
-        public IFluentOneWayBinding<TBindingSource> With<TObserver>(TObserver observer) where TObserver : IMemberBindingObserver
+        public IFluentOneWayBinding<TBindingSource> Using<TObserver>(TObserver observer) where TObserver : IMemberBindingObserver
         {
             _observers!.Add(observer);
             return this;

@@ -15,8 +15,8 @@ namespace ExpressionBinding.UnitTests
             Table? changedTable = null;
             var defaultTable = new Table();
             house.WhenChanged(h => h.MainRoom.Table)
-                .Bind()
-                .With(new PropertyChangeObserver())
+                .BindOneWay()
+                .Using(new PropertyChangeObserver())
                 .To(table => changedTable = table, fallbackValue: defaultTable);
 
             house.MainRoom = null;
@@ -31,7 +31,7 @@ namespace ExpressionBinding.UnitTests
             house
                 .WhenChanged(h => h.MainRoom.Table)
                 .WhenChanged(h => h.Name)
-                .With<PropertyChangeObserver>()
+                .Using<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             house.MainRoom = new();
@@ -54,7 +54,7 @@ namespace ExpressionBinding.UnitTests
             var counter = 0;
             house
                 .WhenChanged(h => h.MainRoom.Table)
-                .With<PropertyChangeObserver>()
+                .Using<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             var oldRoom = house.MainRoom;
@@ -77,7 +77,7 @@ namespace ExpressionBinding.UnitTests
             var counter = 0;
             var subscription = house
                 .WhenChanged(h => h.MainRoom.Table)
-                .With<PropertyChangeObserver>()
+                .Using<PropertyChangeObserver>()
                 .Do(() => counter++);
 
             subscription.Dispose();
@@ -96,7 +96,7 @@ namespace ExpressionBinding.UnitTests
             var counter = 0;
             var subscription = house
                 .WhenChanged(h => h.Rooms.FirstOrDefault())
-                .With<CollectionChangedObserver>()
+                .Using<CollectionChangedObserver>()
                 .Do(() => counter++);
 
             house.Rooms.Clear();

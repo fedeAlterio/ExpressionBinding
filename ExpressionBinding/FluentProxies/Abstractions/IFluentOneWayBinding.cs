@@ -9,7 +9,7 @@ namespace ExpressionBinding.FluentProxies.Abstractions
 {
     public interface IFluentOneWayBinding<TBindingSource>
     {
-        IFluentOneWayBinding<TBindingSource> With<TObserver>(TObserver bindingStrategy) where TObserver : IMemberBindingObserver;
+        IFluentOneWayBinding<TBindingSource> Using<TObserver>(TObserver bindingStrategy) where TObserver : IMemberBindingObserver;
         IDisposable To(Action<TBindingSource?> onSourceExpressionChanged, TBindingSource? fallbackValue = default);
     }
 }

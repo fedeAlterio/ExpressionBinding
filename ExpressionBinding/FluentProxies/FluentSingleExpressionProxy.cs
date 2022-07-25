@@ -20,7 +20,7 @@ namespace ExpressionBinding.FluentProxies
             (this as IExpressionsObserver<TSource>).WhenChanged(expression);
         }
 
-        public IFluentOneWayBinding<TValue> Bind()
+        public IFluentOneWayBinding<TValue> BindOneWay()
         {
             return new FluentOneWayBinding<TSource, TValue>(_source, _expression);
         }

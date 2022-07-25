@@ -10,6 +10,6 @@ namespace ExpressionBinding.FluentProxies.Abstractions
 {
     public interface IFluentSingleExpressionProxy<TSource, TValue> : IExpressionsObserver<TSource>
     {
-        IFluentOneWayBinding<TValue> Bind();
+        IFluentOneWayBinding<TValue> BindOneWay();
     }
 }

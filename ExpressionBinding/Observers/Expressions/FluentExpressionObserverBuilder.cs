@@ -12,13 +12,13 @@ namespace ExpressionBinding.Observers.Expressions
             _source = source;
         }
 
-        IExpressionsObserver<TSource> IExpressionsObserver<TSource>.With<TBindingStrategy>()
+        IExpressionsObserver<TSource> IExpressionsObserver<TSource>.Using<TBindingStrategy>()
         {
             AddObservationStrategy<TBindingStrategy>();
             return this;
         }
 
-        IExpressionsObserver<TSource> IExpressionsObserver<TSource>.With<TBindingStrategy>(TBindingStrategy bindingStrategy)
+        IExpressionsObserver<TSource> IExpressionsObserver<TSource>.Using<TBindingStrategy>(TBindingStrategy bindingStrategy)
         {
             AddObservationStrategy(bindingStrategy);
             return this;
